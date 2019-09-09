@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: docker-python
+    ports:
+      - "3000"
+    depends_on:
+      - client
+    volumes:
+      - ./protocol.py:/usr/src/app/protocol.py:ro
+      - ./scripts:/usr/src/app/scripts:ro
+      - ./server.py:/usr/src/app/script.py:ro  
+  client:
+    build:
+      context: .
+      dockerfile: docker-python
+    depends_on:
+      - iperf3-srv
+    ports:
+      - "3000"
+    volumes:
+      - ./protocol.py:/usr/src/app/protocol.py:ro
+      - ./client.py:/usr/src/app/script.py:ro
+  iperf3-srv:
+    build:
+      context: .
+      dockerfile: docker-iperf3
+    ports:
+      - "5201:5201"
+
+

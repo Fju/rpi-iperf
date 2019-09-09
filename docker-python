@@ -1,0 +1,9 @@
+FROM python:3-buster
+
+RUN apt update && apt install -y iperf3 nmap
+
+WORKDIR /usr/src/app
+
+RUN pip install --no-cache-dir aiohttp
+
+CMD [ "python", "script.py", "--debug" ]

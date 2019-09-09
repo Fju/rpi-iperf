@@ -1,0 +1,7 @@
+FROM debian:buster
+
+RUN apt update && apt install -y iperf3
+
+EXPOSE 5201
+
+CMD iperf3 -s
